@@ -1,7 +1,7 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from dotenv import load_dotenv
-from .handlers import start#, help, like, dislike
+from .handlers import start
 
 
 load_dotenv()
@@ -13,4 +13,8 @@ def main():
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
-   
+    
+
+
+    updater.start_polling()
+    updater.idle()

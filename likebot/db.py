@@ -7,15 +7,21 @@ class DB:
         self.file_name =file_name
 
         if not os.path.exists(file_name):
-            with open("file_name",'w') as f:
+            with open(file_name,'w') as f:
                 json.dump({},f)
         else:
-            with open('file_name','r') as f:
+            with open(file_name,'r') as f:
                 self.data=json.load(f)
     def save(self):
-        with open('file_name','w') as f:
-            json.dump(self.data,f,indent=4)
+        with open(self.file_name,'w') as f:
+            json.dump(self.data, f, indent=4)
 
     def add(self,chat_id,name):
         self.data[str(chat_id)]={"likes":0,"dislikes":0,"name":name}
+        self.save()
+    def inc_like(self,chat_id):
+        self.data[str(chat_id)]['likes']+=1
+        self.save()
+    def inc_dislike(self,chat_id):
+        self.data[str(chat_id)]['dislikes']+=1
         self.save()
