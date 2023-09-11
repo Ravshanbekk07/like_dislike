@@ -14,4 +14,18 @@ def start(update:Update,context:CallbackContext):
         resize_keyboard=True
         )
     )
-def 
+def help(update:Update,context:CallbackContext):
+    update.message.reply_text(
+        text='press one of the buttons below')
+def like(update:Update,context:CallbackContext):
+    user=update.effective_user
+    db.inc_like(user.id)
+    update.message.reply_text(
+        text=f"you have {db.data[str(user.id)] ['likes']} likes and {db.data[str(user.id)]['dislikes']} dislikes"
+    )
+def dislike(update:Update,context:CallbackContext):
+    user=update.effective_user
+    db.inc_dislike(user.id)
+    update.message.reply_text(
+        text=f"you have {db.data[str(user.id)] ['likes']} likes and {db.data[str(user.id)]['dislikes']} dislikes"
+    )
